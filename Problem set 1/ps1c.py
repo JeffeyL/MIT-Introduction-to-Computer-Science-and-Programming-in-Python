@@ -20,7 +20,7 @@ annual_salary = float(input("Enter your annual salary: "))
 down_payment = portion_down_payment*cost_of_house
 
 #Number of guesses so far
-num_guesses = 0
+num_guesses = 1
 #Margin of error
 margin = 100
 
@@ -43,12 +43,14 @@ def calculateMoney(portion, salary):
         i += 1
     return temp
 
-while abs(calculateMoney(guess, annual_salary) - down_payment) >= margin:
-    if calculateMoney(guess, annual_salary) < down_payment:
+guessvalue = calculateMoney(guess, annual_salary)
+while abs(guessvalue - down_payment) >= margin:
+    if guessvalue < down_payment:
         low = guess
     else:
         high = guess
     guess = int((high + low)/2)
+    guessvalue = calculateMoney(guess, annual_salary)
     num_guesses += 1
 
 print("Steps in bisection search: " + str(num_guesses))
